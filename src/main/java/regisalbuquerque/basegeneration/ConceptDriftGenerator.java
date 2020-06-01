@@ -1,7 +1,7 @@
 package regisalbuquerque.basegeneration;
 
 import moa.streams.ConceptDriftStream;
-import moa.streams.InstanceStream;
+import moa.streams.ExampleStream;
 import moa.tasks.WriteStreamToARFFFile;
 import regisalbuquerque.basegeneration.generators.StreamGeneratorMethod;
 
@@ -21,17 +21,17 @@ public class ConceptDriftGenerator {
 		
 	}
 	
-	private static InstanceStream concept_drift(StreamGeneratorMethod gerador, int num, int position, int driftdistance, int noisepercentage)
+	private static ExampleStream<?> concept_drift(StreamGeneratorMethod gerador, int num, int position, int driftdistance, int noisepercentage)
 	{
 		if (num == 1)
 		{
-			InstanceStream stream = gerador.factory(num, noisepercentage);
+			ExampleStream<?> stream = gerador.factory(num, noisepercentage);
 			
 			return stream;
 		}
 		else
 		{
-			InstanceStream stream_aux = gerador.factory(num, noisepercentage);
+			ExampleStream<?> stream_aux = gerador.factory(num, noisepercentage);
 			
 			ConceptDriftStream conceptDriftStream = new ConceptDriftStream();
 			conceptDriftStream.streamOption.setCurrentObject(stream_aux);
